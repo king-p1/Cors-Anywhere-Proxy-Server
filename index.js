@@ -9,10 +9,11 @@ app.use(express.json())
 app.use(cors())
 
 const PORT = process.env.PORT || 4000
+const URL = process.env.URL  
 
 
 app.use('/api',createProxyMiddleware({
-   target:'https://api.creditregistry.com/nigeria/AutoCred/Test/v8/api',
+   target:URL,
    changeOrigin:true,
    pathRewrite: {
     '^/api': ''
