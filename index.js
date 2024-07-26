@@ -1,22 +1,19 @@
 import express from 'express';
-import * as dotenv from 'dotenv';
 import cors from 'cors';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-dotenv.config();
 const app = express();
-app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: '*', // Adjust as needed to restrict allowed origins
+}));
+
 const PORT = process.env.PORT || 4000;
-// Logging middleware for debugging
-app.use((req, res, next) => {
-  console.log(`Received ${req.method} request for ${req.url}`);
-  next();
-});
+
 app.use('/api', createProxyMiddleware({
-  target: 'https://api.creditregistry.com/nigeria/AutoCred/Test/v8/api',
+  target: 'https://api.creditregistry.com/nigeria/AutoCred/Test/v8',
   changeOrigin: true,
   pathRewrite: {
-    '^/api': ''
+    '^/api': '', // Remove '/api' prefix when forwarding
   },
   onProxyReq: (proxyReq, req, res) => {
     console.log(`Proxying ${req.method} request to ${proxyReq.path}`);
@@ -29,15 +26,7 @@ app.use('/api', createProxyMiddleware({
     console.log(`Received ${proxyRes.statusCode} response from target`);
   }
 }));
-app.get("/", async (req, res) => {
-  res.json({ msg: `Server Live on port ${PORT}` });
-});
+
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+  console.log(`Proxy server running on ${PORT}`);
 });
-
-
-
-
-
-
