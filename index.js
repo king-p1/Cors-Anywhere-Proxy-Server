@@ -7,6 +7,8 @@ app.use(cors({
   origin: '*', // Adjust as needed to restrict allowed origins
 }));
 
+app.use(express.json())
+
 const PORT = process.env.PORT || 4000;
 
 app.use('/api', createProxyMiddleware({
