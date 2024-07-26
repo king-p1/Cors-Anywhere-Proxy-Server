@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/api', createProxyMiddleware({
-  target: 'https://api.creditregistry.com/nigeria/AutoCred/Test/v8',
+  target: 'https://api.creditregistry.com/nigeria/AutoCred/Test/v8/api',
   changeOrigin: true,
   pathRewrite: {
     '^/api': ''
