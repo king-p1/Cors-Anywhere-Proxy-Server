@@ -1,5 +1,5 @@
 {
-  "name": "creditregistry-proxy-test",
+  "name": "cors-anywhere-proxy-server",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
